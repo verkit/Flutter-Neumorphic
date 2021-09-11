@@ -5,7 +5,7 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 import '../theme/neumorphic_theme.dart';
 import '../widget/app_bar.dart';
-import 'animation/animated_scale.dart';
+import 'animation/animated_scale.dart' as well;
 import 'container.dart';
 
 typedef void NeumorphicButtonClickListener();
@@ -94,12 +94,8 @@ class _NeumorphicButtonState extends State<NeumorphicButton> {
 
     final theme = NeumorphicTheme.currentTheme(context);
     this.initialStyle = widget.style ??
-        (appBarPresent
-            ? theme.appBarTheme.buttonStyle
-            : (theme.buttonStyle ?? const NeumorphicStyle()));
-    depth = widget.style?.depth ??
-        (appBarPresent ? theme.appBarTheme.buttonStyle.depth : theme.depth) ??
-        0.0;
+        (appBarPresent ? theme.appBarTheme.buttonStyle : (theme.buttonStyle ?? const NeumorphicStyle()));
+    depth = widget.style?.depth ?? (appBarPresent ? theme.appBarTheme.buttonStyle.depth : theme.depth) ?? 0.0;
 
     setState(() {});
   }
@@ -197,7 +193,7 @@ class _NeumorphicButtonState extends State<NeumorphicButton> {
         hasTapUp = true;
         _resetIfTapUp();
       },
-      child: AnimatedScale(
+      child: well.AnimatedScale(
         scale: _getScale(),
         child: Neumorphic(
           margin: widget.margin ?? const EdgeInsets.all(0),
@@ -227,13 +223,9 @@ class _NeumorphicButtonState extends State<NeumorphicButton> {
   double _getScale() {
     if (widget.pressed != null) {
       //defined by the widget that use it
-      return widget.pressed!
-          ? NeumorphicButton.PRESSED_SCALE
-          : NeumorphicButton.UNPRESSED_SCALE;
+      return widget.pressed! ? NeumorphicButton.PRESSED_SCALE : NeumorphicButton.UNPRESSED_SCALE;
     } else {
-      return this.pressed
-          ? NeumorphicButton.PRESSED_SCALE
-          : NeumorphicButton.UNPRESSED_SCALE;
+      return this.pressed ? NeumorphicButton.PRESSED_SCALE : NeumorphicButton.UNPRESSED_SCALE;
     }
   }
 }

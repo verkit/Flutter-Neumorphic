@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_neumorphic/src/widget/animation/animated_scale.dart';
+import 'package:flutter_neumorphic/src/widget/animation/animated_scale.dart' as well;
 
 import '../../flutter_neumorphic.dart';
 import '../neumorphic_box_shape.dart';
@@ -164,7 +164,7 @@ class NeumorphicSwitch extends StatelessWidget {
               shape: NeumorphicShape.flat,
               color: _getTrackColor(theme, this.isEnabled),
             ),
-            child: AnimatedScale(
+            child: well.AnimatedScale(
               scale: this.isEnabled ? 1 : 0,
               alignment: this.value ? Alignment(0.5, 0) : Alignment(-0.5, 0),
               child: AnimatedThumb(
@@ -222,9 +222,7 @@ class NeumorphicSwitch extends StatelessWidget {
   }
 
   Color _getThumbColor(NeumorphicThemeData theme) {
-    Color? color = this.value == true
-        ? this.style.activeThumbColor
-        : this.style.inactiveThumbColor;
+    Color? color = this.value == true ? this.style.activeThumbColor : this.style.inactiveThumbColor;
     return color ?? theme.baseColor;
   }
 }
